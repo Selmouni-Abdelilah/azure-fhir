@@ -1,13 +1,12 @@
 data "azurerm_client_config" "current" {
 }
 
-resource "azurerm_resource_group" "rg" {
-    name = "rg-4-fhir"
-    location = "southcentralus"
+data "azurerm_resource_group" "rg" {
+  name = "rg-4-fhir"
 }
 resource "azurerm_healthcare_service" "healthcare_svc" {
   name                = "fhir-health-az"
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = data.azurerm_resource_group.rg.name
   location            = "southcentralus"
   kind                = "fhir-R4"
   cosmosdb_throughput = "2000"
